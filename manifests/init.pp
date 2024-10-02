@@ -35,7 +35,7 @@ class ipmi (
   Optional[Hash] $snmps,
   Optional[Hash] $users,
   Optional[Hash] $networks,
-  Integer[0] $default_channel = Integer(fact('ipmi.default.channel') or 1),
+  Integer[0] $default_channel = fact('ipmi.default.channel') ? { undef => 1, default => fact('ipmi.default.channel') },
 ) {
   $enable_ipmi = $service_ensure ? {
     'running' => true,
